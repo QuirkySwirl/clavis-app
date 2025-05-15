@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  The Inter and Poppins fonts are loaded via next/font in layout.tsx
+  and their CSS variables (--font-inter, --font-poppins) are made available.
+  Tailwind is configured to use these variables in tailwind.config.ts.
+*/
+
+body {
+  font-family: var(--font-inter), sans-serif; /* Directly use CSS variable from next/font */
+  /* Background and text color are applied in layout.tsx for better SSR/SSG handling */
+  /* Fallback just in case: */
+  /* background-color: #0A0A12; */ /* bg-deep-dark */
+  /* color: #EAEAF2; */ /* text-primary */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative; /* For spotlight pseudo-elements */
+  overflow-x: hidden; /* Prevent horizontal scroll from spotlights */
+}
+
+/* Spotlight Effects */
+body::before,
+body::after {
+  content: '';
+  position: fixed; /* Changed from absolute to fixed to cover viewport */
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.5; /* Adjusted opacity */
+  z-index: -10; /* Ensure it's behind content */
+  pointer-events: none;
+}
+
+body::before { /* Top-left-ish spotlight */
+  width: 50vw;
+  height: 50vw;
+  max-width: 500px; /* Adjusted size */
+  max-height: 500px;
+  left: -15vw; /* Adjusted position */
+  top: -20vh;
+  /* Using new accent colors - can be adjusted */
+  background: radial-gradient(circle, rgba(142, 202, 230, 0.3) 0%, transparent 70%); /* accent-blue-light with 30% opacity */
+}
+
+body::after { /* Bottom-right-ish spotlight */
+  width: 60vw;
+  height: 60vw;
+  max-width: 600px; /* Adjusted size */
+  max-height: 600px;
+  right: -20vw; /* Adjusted position */
+  bottom: -25vh;
+  /* Using new accent colors - can be adjusted */
+  background: radial-gradient(circle, rgba(255, 105, 180, 0.2) 0%, rgba(33, 158, 188, 0.15) 50%, transparent 80%); /* accent-pink-vivid 20%, accent-blue-deep 15% */
+}
+
+
+/* Graphpaper Background */
+body {
+  /* Applied in layout.tsx, but this is a fallback or can be moved here */
+  /* background-color: theme('colors.bg-deep-dark'); */
+  
+  /* Graphpaper lines */
+  background-image:
+    linear-gradient(rgba(22, 22, 36, 0.5) 1px, transparent 1px), /* bg-panel-dark with 50% opacity */
+    linear-gradient(90deg, rgba(22, 22, 36, 0.5) 1px, transparent 1px); /* bg-panel-dark with 50% opacity */
+  background-size: 20px 20px; /* Size of the grid squares */
+  background-position: -1px -1px; /* Offset to align grid */
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-poppins), sans-serif; /* Directly use CSS variable from next/font */
+}
+
+/* Custom scrollbar for a more modern look (optional, browser support varies) */
+/* ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-panel-dark, #161624);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--text-tertiary, #70708A);
+  border-radius: 4px;
+  border: 2px solid var(--bg-panel-dark, #161624);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-secondary, #A0A0B5);
+} */
+
+/* Add any other global base styles or utility overrides here */
