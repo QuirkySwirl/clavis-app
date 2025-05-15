@@ -112,6 +112,8 @@ export default async function BlogPostPage({ params }: Props) {
     );
   }
 
+  const formattedDate = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
   return (
     <div className="bg-bg-deep-dark py-8"> {/* Ensure page background matches theme */}
       <article className="prose prose-invert lg:prose-xl mx-auto px-4 md:px-0 bg-bg-panel-dark py-8 md:py-12 px-6 md:px-10 rounded-xl shadow-2xl border border-glass-border backdrop-blur-lg bg-glass-bg/70">
@@ -120,7 +122,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
           <p className="text-text-tertiary text-base"> {/* Increased font size slightly */}
-            By <span className="text-accent-1 font-semibold">{post.author}</span> on {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            By <span className="text-accent-1 font-semibold">{post.author}</span> on {formattedDate}
           </p>
           {/* TODO: Add reading time estimate here */}
         </header>

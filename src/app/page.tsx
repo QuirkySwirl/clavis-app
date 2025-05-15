@@ -1,10 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useEffect, useRef } from 'react';
-import { Chart, DoughnutController, ArcElement, Tooltip, Legend, ChartConfiguration } from 'chart.js'; // Import specific Chart.js components
+import React, { useEffect, useRef, useCallback } from 'react'; 
+import { Chart, DoughnutController, ArcElement, Tooltip, Legend, ChartConfiguration } from 'chart.js'; 
 
-// Register Chart.js components
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
 
 export default function HomePage() {
@@ -16,10 +15,18 @@ export default function HomePage() {
   const teaserResultOutputRef = useRef<HTMLDivElement>(null);
   const suggestedDQDimensionRef = useRef<HTMLElement>(null);
   const suggestedDQImpactRef = useRef<HTMLSpanElement>(null);
-  let dqRiskChartInstance: Chart | null = null;
+  const dqRiskChartInstanceRef = useRef<Chart | null>(null); 
+
+  const journeyCardMouseMoveHandler = useCallback((e: MouseEvent) => {
+    const htmlCard = e.currentTarget as HTMLElement;
+    const rect = htmlCard.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    htmlCard.style.setProperty('--mouse-x', `${x}px`);
+    htmlCard.style.setProperty('--mouse-y', `${y}px`);
+  }, []);
 
   useEffect(() => {
-    // --- Typewriter Effect ---
     const typewriterElement = typewriterRef.current;
     if (typewriterElement) {
       const headlines = [
@@ -32,7 +39,7 @@ export default function HomePage() {
       let headlineIndex = 0;
       let charIndex = 0;
       let isErasing = false;
-      typewriterElement.textContent = ''; // Clear initial content
+      typewriterElement.textContent = ''; 
 
       const typeHeadline = () => {
         if (!typewriterElement) return;
@@ -61,20 +68,11 @@ export default function HomePage() {
       setTimeout(typeHeadline, 500);
     }
 
-    // --- Journey Card Spotlight Effect ---
     const journeyCards = document.querySelectorAll('.journey-card');
     journeyCards.forEach(card => {
-      const htmlCard = card as HTMLElement; // Type assertion
-      htmlCard.addEventListener('mousemove', (e: MouseEvent) => {
-        const rect = htmlCard.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        htmlCard.style.setProperty('--mouse-x', `${x}px`);
-        htmlCard.style.setProperty('--mouse-y', `${y}px`);
-      });
+      card.addEventListener('mousemove', journeyCardMouseMoveHandler as EventListener);
     });
 
-    // --- DQ Risk Teaser Logic ---
     const initOrUpdateChart = (riskScore: number) => {
       if (!chartRef.current) return;
       const chartData = {
@@ -106,25 +104,27 @@ export default function HomePage() {
             legend: { display: false },
             tooltip: { enabled: false }
           },
-          animation: {
+          animation: { 
             animateRotate: true,
             animateScale: true
-          } as any // Cast to any to resolve TS error for these valid Chart.js options
+          }
         }
       };
 
-      if (dqRiskChartInstance) {
-        dqRiskChartInstance.data.datasets[0].data = [riskScore, 100 - riskScore];
-        const dataset = dqRiskChartInstance.data.datasets[0];
+      if (dqRiskChartInstanceRef.current) {
+        dqRiskChartInstanceRef.current.data.datasets[0].data = [riskScore, 100 - riskScore];
+        const dataset = dqRiskChartInstanceRef.current.data.datasets[0];
         if (dataset.backgroundColor && Array.isArray(dataset.backgroundColor)) {
             dataset.backgroundColor[0] = riskScore > 70 ? 'rgba(250, 63, 106, 0.7)' : riskScore > 45 ? 'rgba(252, 111, 58, 0.7)' : 'rgba(249, 197, 44, 0.7)';
         }
         if (dataset.borderColor && Array.isArray(dataset.borderColor)) {
             dataset.borderColor[0] = riskScore > 70 ? 'rgba(250, 63, 106, 1)' : riskScore > 45 ? 'rgba(252, 111, 58, 1)' : 'rgba(249, 197, 44, 1)';
         }
-        dqRiskChartInstance.update();
+        dqRiskChartInstanceRef.current.update();
       } else {
-        dqRiskChartInstance = new Chart(chartRef.current, chartConfig);
+        if (chartRef.current) { 
+          dqRiskChartInstanceRef.current = new Chart(chartRef.current, chartConfig);
+        }
       }
     };
 
@@ -155,18 +155,26 @@ export default function HomePage() {
       }
 
       if (val1 === 0 && val2 === 0 && val3 === 0) {
-        teaserResultOutputRef.current.style.display = 'none';
-        if (dqRiskChartInstance) {
-          dqRiskChartInstance.destroy();
-          dqRiskChartInstance = null;
+        if (teaserResultOutputRef.current) {
+            teaserResultOutputRef.current.style.display = 'none';
+        }
+        if (dqRiskChartInstanceRef.current) {
+          dqRiskChartInstanceRef.current.destroy();
+          dqRiskChartInstanceRef.current = null;
         }
         initOrUpdateChart(0);
         return;
       }
-
-      suggestedDQDimensionRef.current.textContent = dimension;
-      suggestedDQImpactRef.current.textContent = impact;
-      teaserResultOutputRef.current.style.display = 'block';
+      
+      if (suggestedDQDimensionRef.current) {
+        suggestedDQDimensionRef.current.textContent = dimension;
+      }
+      if (suggestedDQImpactRef.current) {
+        suggestedDQImpactRef.current.textContent = impact;
+      }
+      if (teaserResultOutputRef.current) {
+        teaserResultOutputRef.current.style.display = 'block';
+      }
       initOrUpdateChart(riskScore);
     };
 
@@ -176,46 +184,32 @@ export default function HomePage() {
 
     if (q1 && q2 && q3) {
       [q1, q2, q3].forEach(select => select.addEventListener('change', teaserLogic));
-      teaserLogic(); // Initial call
+      teaserLogic(); 
     }
     
-    // Cleanup function
     return () => {
-      if (dqRiskChartInstance) {
-        dqRiskChartInstance.destroy();
-        dqRiskChartInstance = null;
+      if (dqRiskChartInstanceRef.current) {
+        dqRiskChartInstanceRef.current.destroy();
+        dqRiskChartInstanceRef.current = null;
       }
       if (q1 && q2 && q3) {
         [q1, q2, q3].forEach(select => select.removeEventListener('change', teaserLogic));
       }
       journeyCards.forEach(card => {
-        const htmlCard = card as HTMLElement;
-         htmlCard.removeEventListener('mousemove', (e: MouseEvent) => { // Need to pass the same function reference to remove, this might not work as is
-            const rect = htmlCard.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            htmlCard.style.setProperty('--mouse-x', `${x}px`);
-            htmlCard.style.setProperty('--mouse-y', `${y}px`);
-        });
+        card.removeEventListener('mousemove', journeyCardMouseMoveHandler as EventListener);
       });
     };
-  }, []); // Empty dependency array ensures this runs once on mount and cleans up on unmount
+  }, [journeyCardMouseMoveHandler]); 
 
   const selectJourney = (journeyType: string) => {
     console.log("Selected journey:", journeyType);
-    // Navigation logic would go here, e.g., using Next.js router
-    // For now, just an alert or console log
     alert(`Navigating to "${journeyType}" diagnostic journey... (Full app would load new content here)`);
   };
 
 
   return (
-    // Applying Tailwind classes based on Sample.html structure
-    // Note: Some styles from Sample.html (like body::before/after spotlights) are global and should be in globals.css or layout.tsx
-    // The main container and header/footer are handled by layout.tsx
     <>
       <style jsx global>{`
-        /* Specific styles for journey card spotlight from Sample.html */
         .journey-card::before {
             content: "";
             position: absolute;
@@ -223,11 +217,11 @@ export default function HomePage() {
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 0.75rem; /* Assuming var(--border-radius-lg) is 12px or 0.75rem */
+            border-radius: 0.75rem; 
             background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.15), transparent 40%);
             opacity: 0;
             transition: opacity 0.4s ease;
-            z-index: 0; /* Ensure content is above */
+            z-index: 0; 
             pointer-events: none;
         }
         .journey-card:hover::before {
@@ -248,7 +242,7 @@ export default function HomePage() {
             understand their true business cost, and build a solid foundation for growth and AI readiness.
             Stop firefighting, start strategizing.
           </p>
-          <Link href="#journey-starters-section" className="cta-button bg-gradient-to-r from-cta-bg-start to-cta-bg-end text-white py-3 px-8 md:py-4 md:px-10 text-base md:text-lg rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300" data-spotlight-hover="true">
+          <Link href="#journey-starters-section" className="cta-button bg-gradient-to-r from-accent-1 via-accent-2 to-accent-3 text-white py-3 px-8 md:py-4 md:px-10 text-base md:text-lg rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300" data-spotlight-hover="true">
             Discover Your Data's Potential
           </Link>
         </section>
@@ -349,7 +343,7 @@ export default function HomePage() {
           <p className="text-base md:text-lg text-text-secondary leading-relaxed mb-8">
             Clavis is built on decades of real-world experience tackling data challenges in transforming businesses. We believe in a <strong>reality-based approach</strong>: cutting through organizational theater to address the tangible data issues that truly impact your bottom line. It's about achieving <strong>"enough"</strong> of the <em>right</em> quality data to drive meaningful outcomes, not just chasing endless data or perfection. We empower you to move from data chaos to business clarity and confident action.
           </p>
-          <Link href="/blog/making-of-clavis" className="cta-button bg-gradient-to-r from-cta-bg-start to-cta-bg-end text-white py-3 px-8 rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300" data-spotlight-hover="true">
+          <Link href="/blog/making-of-clavis" className="cta-button bg-gradient-to-r from-accent-1 via-accent-2 to-accent-3 text-white py-3 px-8 rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300" data-spotlight-hover="true">
             Learn More About Our Approach
           </Link>
         </section>

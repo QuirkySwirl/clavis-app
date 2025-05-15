@@ -119,3 +119,107 @@ h1, h2, h3, h4, h5, h6 {
 } */
 
 /* Add any other global base styles or utility overrides here */
+
+/*
+  ---break---
+*/
+
+@layer base {
+  :root {
+    /* Default light theme (Clavis is dark-only, but good to have placeholders) */
+    --background: 240 10% 95%; /* Light greyish blue */
+    --foreground: 240 10% 10%; /* Dark blue-grey */
+
+    --card: 240 10% 100%;
+    --card-foreground: 240 10% 10%;
+
+    --popover: 240 10% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    --primary: 16 97% 61%; /* accent-2 Orange */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 193 71% 43%; /* accent-blue-deep */
+    --secondary-foreground: 0 0% 100%; /* White */
+
+    --muted: 240 9% 70%; /* Lighter version of text-tertiary */
+    --muted-foreground: 240 9% 30%; /* Darker version of text-tertiary */
+
+    --accent: 46 95% 57%; /* accent-1 Yellow/Gold */
+    --accent-foreground: 240 10% 10%; /* Dark text for yellow */
+    
+    --destructive: 345 95% 61%; /* accent-3 Deep Pink */
+    --destructive-foreground: 0 0% 100%; /* White */
+
+    --border: 240 10% 85%; /* Light border */
+    --input: 240 10% 85%;
+    --ring: 16 97% 61%; /* accent-2 Orange for focus */
+
+    --radius: 0.5rem;
+
+    /* Clavis Specific Colors (Hex for direct use, HSL for Shadcn if needed) */
+    --clavis-bg-deep-dark: 240 17% 5%; /* #0A0A12 */
+    --clavis-bg-panel-dark: 240 21% 11%; /* #161624 */
+    --clavis-text-primary: 240 27% 95%; /* #EAEAF2 */
+    --clavis-text-secondary: 240 10% 67%; /* #A0A0B5 */
+    --clavis-text-tertiary: 240 9% 49%; /* #70708A */
+    
+    --clavis-accent-1: 46 95% 57%; /* #F9C52C - Bright Yellow/Gold */
+    --clavis-accent-2: 16 97% 61%; /* #FC6F3A - Vibrant Orange */
+    --clavis-accent-3: 345 95% 61%; /* #FA3F6A - Deep Pink / Magenta */
+    --clavis-accent-4: 313 70% 57%; /* #D42CCA - Purpleish Pink */
+    
+    --clavis-accent-blue-light: 199 61% 75%; /* #8ECAE6 */
+    --clavis-accent-blue-deep: 193 71% 43%; /* #219EBC */
+    --clavis-accent-pink-soft: 350 100% 85%; /* #FFB6C1 */
+    --clavis-accent-pink-vivid: 328 100% 70%; /* #FF69B4 */
+
+    --clavis-glass-bg: 240 25% 16%; /* Approximation of rgba(30, 30, 50, 0.55) */
+    --clavis-glass-border: 0 0% 100%; /* For border-opacity later */
+  }
+
+  .dark {
+    --background: var(--clavis-bg-deep-dark);
+    --foreground: var(--clavis-text-primary);
+
+    --card: var(--clavis-bg-panel-dark);
+    --card-foreground: var(--clavis-text-primary);
+
+    --popover: var(--clavis-bg-panel-dark);
+    --popover-foreground: var(--clavis-text-primary);
+
+    --primary: var(--clavis-accent-2); /* Orange */
+    --primary-foreground: 0 0% 100%; /* White for high contrast on orange */
+
+    --secondary: var(--clavis-accent-blue-deep);
+    --secondary-foreground: var(--clavis-text-primary);
+
+    --muted: var(--clavis-text-tertiary);
+    --muted-foreground: var(--clavis-text-secondary);
+
+    --accent: var(--clavis-accent-1); /* Yellow/Gold */
+    --accent-foreground: 240 21% 11%; /* Dark text (bg-panel-dark) for yellow */
+    
+    --destructive: var(--clavis-accent-3); /* Deep Pink */
+    --destructive-foreground: var(--clavis-text-primary);
+
+    /* For border, input, ring, we use our glass theme primarily */
+    /* Shadcn's default border/input might be overridden by glass styles */
+    --border: 255 255 255 / 0.1; /* Direct RGBA for glass-border */
+    --input: 255 255 255 / 0.1; /* Similar for input backgrounds if needed */
+    --ring: var(--clavis-accent-blue-light); /* Light blue for focus rings */
+  }
+}
+
+/*
+  ---break---
+*/
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
