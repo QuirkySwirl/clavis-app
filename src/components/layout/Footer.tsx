@@ -5,7 +5,7 @@ import React from 'react';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="bg-bg-panel-dark text-text-tertiary p-4 text-center text-sm">
+    <footer className="bg-bg-deep-dark text-text-tertiary p-4 text-center text-sm">
       <div className="container mx-auto">
         <p>&copy; {currentYear} Clavis by Kartik Iyer. All rights reserved.</p>
         <p className="mt-1">

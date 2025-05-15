@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React, { useEffect, useRef } from 'react';
-import { Chart, DoughnutController, ArcElement, Tooltip, Legend } from 'chart.js'; // Import specific Chart.js components
+import { Chart, DoughnutController, ArcElement, Tooltip, Legend, ChartConfiguration } from 'chart.js'; // Import specific Chart.js components
 
 // Register Chart.js components
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
@@ -95,7 +95,7 @@ export default function HomePage() {
           rotation: 270,
         }]
       };
-      const chartConfig: any = { // Use any for chartConfig to avoid deep type issues with Chart.js
+      const chartConfig: ChartConfiguration<'doughnut'> = { 
         type: 'doughnut',
         data: chartData,
         options: {
@@ -109,7 +109,7 @@ export default function HomePage() {
           animation: {
             animateRotate: true,
             animateScale: true
-          }
+          } as any // Cast to any to resolve TS error for these valid Chart.js options
         }
       };
 
@@ -248,7 +248,7 @@ export default function HomePage() {
             understand their true business cost, and build a solid foundation for growth and AI readiness.
             Stop firefighting, start strategizing.
           </p>
-          <Link href="#journey-starters-section" className="cta-button bg-gradient-to-r from-cta-bg-start to-cta-bg-end text-white py-3 px-8 md:py-4 md:px-10 text-base md:text-lg rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300">
+          <Link href="#journey-starters-section" className="cta-button bg-gradient-to-r from-cta-bg-start to-cta-bg-end text-white py-3 px-8 md:py-4 md:px-10 text-base md:text-lg rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300" data-spotlight-hover="true">
             Discover Your Data's Potential
           </Link>
         </section>
@@ -349,7 +349,7 @@ export default function HomePage() {
           <p className="text-base md:text-lg text-text-secondary leading-relaxed mb-8">
             Clavis is built on decades of real-world experience tackling data challenges in transforming businesses. We believe in a <strong>reality-based approach</strong>: cutting through organizational theater to address the tangible data issues that truly impact your bottom line. It's about achieving <strong>"enough"</strong> of the <em>right</em> quality data to drive meaningful outcomes, not just chasing endless data or perfection. We empower you to move from data chaos to business clarity and confident action.
           </p>
-          <Link href="/blog/making-of-clavis" className="cta-button bg-gradient-to-r from-cta-bg-start to-cta-bg-end text-white py-3 px-8 rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300">
+          <Link href="/blog/making-of-clavis" className="cta-button bg-gradient-to-r from-cta-bg-start to-cta-bg-end text-white py-3 px-8 rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300" data-spotlight-hover="true">
             Learn More About Our Approach
           </Link>
         </section>

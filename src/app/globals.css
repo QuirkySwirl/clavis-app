@@ -62,10 +62,38 @@ body {
   
   /* Graphpaper lines */
   background-image:
-    linear-gradient(rgba(22, 22, 36, 0.5) 1px, transparent 1px), /* bg-panel-dark with 50% opacity */
-    linear-gradient(90deg, rgba(22, 22, 36, 0.5) 1px, transparent 1px); /* bg-panel-dark with 50% opacity */
-  background-size: 20px 20px; /* Size of the grid squares */
+    linear-gradient(rgba(70, 70, 100, 0.3) 1px, transparent 1px), /* Adjusted color and opacity */
+    linear-gradient(90deg, rgba(70, 70, 100, 0.3) 1px, transparent 1px); /* Adjusted color and opacity */
+  background-size: 25px 25px; /* Slightly larger grid squares */
   background-position: -1px -1px; /* Offset to align grid */
+}
+
+/* Global Spotlight Hover Effect */
+[data-spotlight-hover="true"] {
+  position: relative;
+  overflow: hidden; /* To contain the pseudo-element */
+}
+
+[data-spotlight-hover="true"]::before {
+  content: "";
+  position: absolute;
+  top: var(--mouse-y-local, 50%); /* Use local mouse position or default to center */
+  left: var(--mouse-x-local, 50%);
+  width: 0; /* Start small */
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
+  opacity: 0;
+  z-index: 0; /* Ensure it's behind the content of the element */
+}
+
+[data-spotlight-hover="true"]:hover::before {
+  width: 200px; /* Expand size on hover */
+  height: 200px;
+  opacity: 1;
 }
 
 
