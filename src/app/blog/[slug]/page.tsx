@@ -14,7 +14,7 @@ export async function generateMetadata(
   { params }: Props
   // _parent: ResolvingMetadata // Removed as it's unused
 ): Promise<Metadata> {
-  const post = await getPostData((await params).slug);
+  const post = await getPostData(params.slug);
   if (!post) {
     return {
       title: 'Post Not Found | Clavis Blog',
@@ -98,7 +98,7 @@ const components = {
 };
 
 export default async function BlogPostPage({ params }: Props) {
-  const post = await getPostData((await params).slug);
+  const post = await getPostData(params.slug);
 
   if (!post || !post.content) {
     return (
