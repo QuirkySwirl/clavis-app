@@ -30,7 +30,7 @@ export default function HomePage() {
     const typewriterElement = typewriterRef.current;
     if (typewriterElement) {
       const headlines = [
-        "Is 'Bad Data' Slowing You Down?",
+        "Is &apos;Bad Data&apos; Slowing You Down?",
         "Unlock Your Business Clarity.",
         "Tired of Costly Process Errors?",
         "Build Trust in Your KPIs.",
@@ -243,7 +243,7 @@ export default function HomePage() {
             Stop firefighting, start strategizing.
           </p>
           <Link href="#journey-starters-section" className="cta-button bg-gradient-to-r from-accent-1 via-accent-2 to-accent-3 text-white py-3 px-8 md:py-4 md:px-10 text-base md:text-lg rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300" data-spotlight-hover="true">
-            Discover Your Data's Potential
+            Discover Your Data&apos;s Potential
           </Link>
         </section>
 
@@ -283,15 +283,15 @@ export default function HomePage() {
                 <select id="q2-silos" ref={q2SilosRef} className="w-full p-3 rounded-md border border-glass-border bg-white/5 text-text-primary focus:ring-2 focus:ring-accent-2 outline-none transition-all">
                   <option value="0">Rarely / We have a single source of truth</option>
                   <option value="1">Sometimes / Occasional discrepancies</option>
-                  <option value="2">Frequently / It's a common problem</option>
+                  <option value="2">Frequently / It&apos;s a common problem</option>
                 </select>
               </div>
               <div className="question-group mb-6">
                 <label htmlFor="q3-pain" className="block font-medium text-text-secondary mb-2">Are you frequently dealing with operational errors like incorrect billings, shipping mistakes, or inventory discrepancies?</label>
                 <select id="q3-pain" ref={q3PainRef} className="w-full p-3 rounded-md border border-glass-border bg-white/5 text-text-primary focus:ring-2 focus:ring-accent-2 outline-none transition-all">
                   <option value="0">Very Rarely</option>
-                  <option value="1">Sometimes, it's a moderate concern</option>
-                  <option value="2">Often, it's a significant pain point</option>
+                  <option value="1">Sometimes, it&apos;s a moderate concern</option>
+                  <option value="2">Often, it&apos;s a significant pain point</option>
                 </select>
               </div>
               <div ref={teaserResultOutputRef} className="teaser-result mt-6 p-4 bg-glass-bg rounded-lg text-center" style={{ display: 'none' }}>
@@ -341,7 +341,7 @@ export default function HomePage() {
             </span>
           </h2>
           <p className="text-base md:text-lg text-text-secondary leading-relaxed mb-8">
-            Clavis is built on decades of real-world experience tackling data challenges in transforming businesses. We believe in a <strong>reality-based approach</strong>: cutting through organizational theater to address the tangible data issues that truly impact your bottom line. It's about achieving <strong>"enough"</strong> of the <em>right</em> quality data to drive meaningful outcomes, not just chasing endless data or perfection. We empower you to move from data chaos to business clarity and confident action.
+            Clavis is built on decades of real-world experience tackling data challenges in transforming businesses. We believe in a <strong>reality-based approach</strong>: cutting through organizational theater to address the tangible data issues that truly impact your bottom line. It&apos;s about achieving <strong>&quot;enough&quot;</strong> of the <em>right</em> quality data to drive meaningful outcomes, not just chasing endless data or perfection. We empower you to move from data chaos to business clarity and confident action.
           </p>
           <Link href="/blog/making-of-clavis" className="cta-button bg-gradient-to-r from-accent-1 via-accent-2 to-accent-3 text-white py-3 px-8 rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300" data-spotlight-hover="true">
             Learn More About Our Approach

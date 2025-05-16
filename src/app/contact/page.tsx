@@ -8,7 +8,7 @@ export default function ContactPage() {
         Get in Touch
       </h1>
       <p className="text-lg text-text-secondary mb-12 text-center max-w-2xl mx-auto">
-        Have questions about Clavis, data quality, or want to discuss a potential project? We'd love to hear from you.
+        Have questions about Clavis, data quality, or want to discuss a potential project? We&apos;d love to hear from you.
       </p>
 
       <div className="max-w-lg mx-auto bg-glass-bg border border-glass-border rounded-lg p-8 shadow-xl">
@@ -73,7 +73,7 @@ export default function ContactPage() {
           </div>
           
           {/* Optional: Add a honeypot field for spam prevention if using Formspree */}
-          <input type="text" name="_gotcha" style={{ display: 'none' }} aria-label="Don't fill this out if you're human" />
+          <input type="text" name="_gotcha" style={{ display: 'none' }} aria-label="Don&apos;t fill this out if you&apos;re human" />
 
           <div className="text-center">
             <Button type="submit" variant="default" size="lg" className="bg-gradient-to-r from-accent-2 to-accent-3 hover:from-accent-2/90 hover:to-accent-3/90 text-white">

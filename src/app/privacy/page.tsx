@@ -8,12 +8,12 @@ export default function PrivacyPage() {
       </h1>
       <div className="prose prose-invert max-w-none text-text-secondary">
         <p>
-          Your privacy is important to us. It is Kartik Iyer's policy to respect your privacy regarding any information we may collect from you across our application, Clavis, and other sites we own and operate.
+          Your privacy is important to us. It is Kartik Iyer&apos;s policy to respect your privacy regarding any information we may collect from you across our application, Clavis, and other sites we own and operate.
         </p>
 
         <h2 className="text-2xl font-heading font-semibold mt-6 mb-4 text-text-primary">1. Information We Collect</h2>
         <p>
-          <strong>Log data:</strong> When you access Clavis, our servers may automatically log standard data provided by your web browser. This data is considered "non-identifying information", as it does not personally identify you on its own. It may include your computer’s Internet Protocol (IP) address, your browser type and version, the pages you visit, the time and date of your visit, the time spent on each page, and other details.
+          <strong>Log data:</strong> When you access Clavis, our servers may automatically log standard data provided by your web browser. This data is considered &quot;non-identifying information&quot;, as it does not personally identify you on its own. It may include your computer&apos;s Internet Protocol (IP) address, your browser type and version, the pages you visit, the time and date of your visit, the time spent on each page, and other details.
         </p>
         <p>
           <strong>User Input for Diagnostics:</strong> Clavis allows users to input information about their business processes, KPIs, strategic objectives, and pain points to receive diagnostic results and generate draft initiative charters. This information is processed in real-time to provide the service and is not stored persistently on our servers after your session ends. We do not associate this input with any personal identifiers.
@@ -47,10 +47,10 @@ export default function PrivacyPage() {
 
         <h2 className="text-2xl font-heading font-semibold mt-6 mb-4 text-text-primary">6. Links to Other Sites</h2>
         <p>
-          Our Service may contain links to other sites that are not operated by us. If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
+          Our Service may contain links to other sites that are not operated by us. If you click on a third party link, you will be directed to that third party&apos;s site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
         </p>
 
-        <h2 className="text-2xl font-heading font-semibold mt-6 mb-4 text-text-primary">7. Children's Privacy</h2>
+        <h2 className="text-2xl font-heading font-semibold mt-6 mb-4 text-text-primary">7. Children&apos;s Privacy</h2>
         <p>
           Clavis does not knowingly collect personally identifiable information from children under the age of 16. If you are a parent or guardian and you are aware that your child has provided us with Personal Information, please contact us.
         </p>

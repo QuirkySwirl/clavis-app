@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: Props) {
     return (
       <div className="text-center py-10">
         <h1 className="text-3xl font-bold mb-4">Post not found</h1>
-        <p className="text-text-secondary">Sorry, we couldn't find the post you were looking for.</p>
+        <p className="text-text-secondary">Sorry, we couldn&apos;t find the post you were looking for.</p>
         <Link href="/blog" className="text-accent-2 hover:underline mt-4 inline-block">
           &larr; Back to Blog
         </Link>
